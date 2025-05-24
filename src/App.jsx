@@ -1,10 +1,13 @@
 import './App.css'
+import Icon from './components/Icon/Icon'
 
 function App() {
   return (
-      <div>
-        welcome to the tic tac toe game!
-      </div>
+    <>
+      <Icon iconName="cross"/>
+      <Icon iconName="circle"/>
+      <Icon/>
+    </>
   )
 }
 
