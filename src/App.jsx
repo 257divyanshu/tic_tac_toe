@@ -1,13 +1,12 @@
 import './App.css'
 import Card from './components/Card/Card'
+import Grid from './components/Grid/Grid'
 import Icon from './components/Icon/Icon'
 
 function App() {
   return (
     <>
-      <Card/>
-      <Card iconName={'circle'}/>
-      <Card iconName={'cross'}/>
+      <Grid numberOfCards={9}/>
     </>
   )
 }
