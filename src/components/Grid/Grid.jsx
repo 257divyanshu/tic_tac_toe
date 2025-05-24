@@ -7,6 +7,7 @@ function Grid({ numberOfCards }) {
     function cardClickHandler() {
         console.log("card clicked");
         setTurn(!turn);
+        return turn;
     }
     return (
         <>
