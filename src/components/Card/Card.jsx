@@ -1,9 +1,12 @@
 import Icon from "../Icon/Icon";
 import "./card.css";
 
-function Card ({iconName}) {
+function Card ({iconName, onCardClick}) {
     return (
-        <div className="card">
+        <div
+            className="card"
+            onClick={onCardClick}
+            >
             <Icon iconName={iconName}/>
         </div>
     )
