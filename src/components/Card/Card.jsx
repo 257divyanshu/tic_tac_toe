@@ -1,22 +1,24 @@
-import { useState } from "react";
 import Icon from "../Icon/Icon";
 import "./card.css";
 
-function Card ({onCardClick}) {
-    let [iconName,setIconName] = useState("");
+function Card ({onCardClick, player, index}) {
+    let icon = <Icon/>
+    if(player=="X"){
+        icon = <Icon iconName={"cross"} />
+    }
+    else if(player=="O"){
+        icon = <Icon iconName={"circle"} />
+    };
     return (
         <div
             className="card"
-            onClick={()=>{
-                if(!iconName){
-                    let turn = onCardClick();
-                    setIconName(turn ? "circle":"cross");
-                }
-            }}
+            onClick={()=>onCardClick(index)}
             >
-            <Icon iconName={iconName}/>
+            {icon}
         </div>
     )
 }
 
 export default Card;
+
+// - key cannot be used as a prop

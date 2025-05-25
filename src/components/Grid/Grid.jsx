@@ -4,10 +4,16 @@ import "./grid.css"
 
 function Grid({ numberOfCards }) {
     const [turn,setTurn] = useState(true); // true -> O false -> X
-    function cardClickHandler() {
-        console.log("card clicked");
+    const [board,setBoard] = useState(Array(numberOfCards).fill("")); // true -> O false -> X
+    function cardClickHandler(index) {
+        if(turn){
+            board[index] = "O";
+        }
+        else{
+            board[index] = "X";
+        };
+        setBoard(board);
         setTurn(!turn);
-        return turn;
     }
     return (
         <>
@@ -29,9 +35,25 @@ function Grid({ numberOfCards }) {
                 {/* Now .map() works perfectly because it iterates over all the elements. */}
 
                 {/* sir's way */}
-                {Array(numberOfCards).fill(<Card />).map((element, index) => {
-                    return <Card key={index} onCardClick={cardClickHandler} />
+                {/* {Array(numberOfCards).fill(<Card />).map((element, index) => {
+                    return <Card key={index} player={turn ? "circle":"cross"} onCardClick={cardClickHandler} />
+                })} */}
+                {/* using the player prop here is a bad idea */}
+                {/* because on clicking any card */}
+                {/* turn will toggle */}
+                {/* if turn toggles */}
+                {/* player prop's value changes */}
+                {/* player prop's value changes for all Card components */}
+                {/* because the prop's value changes */}
+                {/* all components re-render */}
+                {/* this is a problem! */}
+                {/* we want the only the card that is clicked to re-render with the new icon */}
+                {/* so we need to do something inside the Card component's onclick handler */}
+
+                {board.map((value,idx)=>{
+                    return <Card key={idx} player={value} onCardClick={cardClickHandler} index={idx}/>
                 })}
+                
 
 
             </div>
