@@ -2,9 +2,28 @@ import { useState } from "react";
 import Card from "../Card/Card";
 import "./grid.css"
 
+function isWinner(board, symbol){
+    if(
+        (board[0]==board[1] && board[1]==board[2] && board[2]==symbol) || 
+        (board[3]==board[4] && board[4]==board[5] && board[5]==symbol) || 
+        (board[6]==board[7] && board[7]==board[8] && board[8]==symbol) || 
+        (board[0]==board[3] && board[3]==board[6] && board[6]==symbol) || 
+        (board[1]==board[4] && board[4]==board[7] && board[7]==symbol) || 
+        (board[2]==board[5] && board[5]==board[8] && board[8]==symbol) || 
+        (board[0]==board[4] && board[4]==board[8] && board[8]==symbol) || 
+        (board[2]==board[4] && board[4]==board[6] && board[6]==symbol)
+    ){
+        return symbol;
+    }
+    else{
+        return null;
+    }
+};
+
 function Grid({ numberOfCards }) {
     const [turn,setTurn] = useState(true); // true -> O false -> X
     const [board,setBoard] = useState(Array(numberOfCards).fill("")); // true -> O false -> X
+    const [winner,setWinner] = useState(null);
     function cardClickHandler(index) {
         if(turn){
             board[index] = "O";
@@ -12,11 +31,16 @@ function Grid({ numberOfCards }) {
         else{
             board[index] = "X";
         };
+        const winnerPlayer = isWinner(board,turn ? "O":"X");
+        if(winnerPlayer){
+            setWinner(winnerPlayer);
+        }
         setBoard(board);
         setTurn(!turn);
     }
     return (
         <>
+            {winner && <h1 className="turn-highlight">Winner is {winner}</h1>}
             <h1 className="turn-highlight">Current Turn : {turn ? "O" : "X"}</h1>
             <div className="grid">
 
