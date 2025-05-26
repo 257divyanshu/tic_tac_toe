@@ -1,6 +1,9 @@
+import { ToastContainer, toast } from 'react-toastify';
 import { useState } from "react";
 import Card from "../Card/Card";
 import "./grid.css"
+// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 function isWinner(board, symbol){
     if(
@@ -34,6 +37,7 @@ function Grid({ numberOfCards }) {
         const winnerPlayer = isWinner(board,turn ? "O":"X");
         if(winnerPlayer){
             setWinner(winnerPlayer);
+            toast.success(`Congratulations ${winnerPlayer}`);
         }
         setBoard(board);
         setTurn(!turn);
@@ -45,6 +49,7 @@ function Grid({ numberOfCards }) {
     }
     return (
         <div className="grid-wrapper">
+            <ToastContainer position='top-center' />
             {winner && (
                 <>
                     <h1 className="turn-highlight">Winner is {winner}</h1>
