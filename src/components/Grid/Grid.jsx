@@ -38,9 +38,19 @@ function Grid({ numberOfCards }) {
         setBoard(board);
         setTurn(!turn);
     }
+    function resetGame(){
+        setBoard(Array(numberOfCards).fill(""));
+        setWinner(null);
+        setTurn(true);
+    }
     return (
-        <>
-            {winner && <h1 className="turn-highlight">Winner is {winner}</h1>}
+        <div className="grid-wrapper">
+            {winner && (
+                <>
+                    <h1 className="turn-highlight">Winner is {winner}</h1>
+                    <button className="resetBtn" onClick={resetGame}>Reset Game</button>
+                </>
+            )}
             <h1 className="turn-highlight">Current Turn : {turn ? "O" : "X"}</h1>
             <div className="grid">
 
@@ -81,7 +91,7 @@ function Grid({ numberOfCards }) {
 
 
             </div>
-        </>
+        </div>
     )
 }
 
