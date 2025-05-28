@@ -11,21 +11,19 @@ function Grid({ numberOfCards }) {
     const [board, setBoard] = useState(Array(numberOfCards).fill("")); // true -> O false -> X
     const [winner, setWinner] = useState(null);
     function cardClickHandler(index) {
-        if (!winner) {
-            if (turn) {
-                board[index] = "O";
-            }
-            else {
-                board[index] = "X";
-            };
-            const winnerPlayer = isWinner(board, turn ? "O" : "X");
-            if (winnerPlayer) {
-                setWinner(winnerPlayer);
-                toast.success(`Congratulations ${winnerPlayer}`);
-            }
-            setBoard(board);
-            setTurn(!turn);
+        if (turn) {
+            board[index] = "O";
         }
+        else {
+            board[index] = "X";
+        };
+        const winnerPlayer = isWinner(board, turn ? "O" : "X");
+        if (winnerPlayer) {
+            setWinner(winnerPlayer);
+            toast.success(`Congratulations ${winnerPlayer}`);
+        }
+        setBoard(board);
+        setTurn(!turn);
     }
     function resetGame() {
         setBoard(Array(numberOfCards).fill(""));
@@ -75,7 +73,7 @@ function Grid({ numberOfCards }) {
                 {/* so we need to do something inside the Card component's onclick handler */}
 
                 {board.map((value, idx) => {
-                    return <Card key={idx} player={value} onCardClick={cardClickHandler} index={idx} />
+                    return <Card gameEnded={winner ? true : false} key={idx} player={value} onCardClick={cardClickHandler} index={idx} />
                 })}
 
 
